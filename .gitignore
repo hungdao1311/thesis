@@ -1,0 +1,10 @@
+/finaldata/
+/.idea/
+formatSingleFile.py
+model2.sav
+/neg_hog/
+/pos_hog/
+/model8000_Fmax0.035_fmax0.1.sav
+/samples.npz
+/neg_test_set/
+/pos_test_set/

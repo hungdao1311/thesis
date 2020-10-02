@@ -1,0 +1,962 @@
+\documentclass[12pt,a4paper]{article}
+\title{Proposal}
+\usepackage{geometry}
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=1in,
+	right = 0.79in,
+	top=1in,
+	bottom=1in,
+	headsep=0.5in,%khoang cach header vs text
+}
+\usepackage{multicol}
+\usepackage{pgfgantt}
+\usepackage{float}
+\usepackage{pdfpages}%use for insert pdf page
+\usepackage{titling}% multi titlepage
+\usepackage{vntex}
+\usepackage{hyperref}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{alltt}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+\usepackage{wrapfig}%chèn hình lấn chữ
+\usepackage{lipsum}
+\usepackage{titlesec}
+\usepackage{gensymb}
+
+\usepackage{listings} % Required for insertion of code
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}							% Standard graphics package
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usepackage{indentfirst}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+
+\usepackage{titlesec}
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\usepackage{sectsty} %dùng để chỉnh font, fontsize, color cho các section và subsection
+\usepackage{xcolor,colortbl}% thêm gói colortbl để định nghĩa màu
+\usetikzlibrary{arrows,snakes,backgrounds}
+\counterwithin{figure}{section}%numbering figure according section
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead{} % clear all header fields
+\fancyhead[L]
+{
+	\begin{tabular}{rl}
+		\begin{picture}(30,15)(0,0)
+		\put(26,-8){\includegraphics[width=9mm, height=9mm]{image/cse.png}}\put(0,-8){\includegraphics[width=9mm, height=9mm]{image/LogoBK.jpg}}
+		%\put(0,-8){\epsfig{width=9mm,figure=hcmut.eps}}
+		\end{picture}&
+		%\includegraphics[width=9mm, height=9mm]{hcmut.png} & %
+		\begin{tabular}{l}
+			{ \bf \fontfamily{cmtt}\selectfont \color{black!65!blue} Trường Đại Học Bách Khoa TPHCM}\\
+			{ \bf \fontfamily{cmtt}\selectfont \color{black!65!blue}  Khoa Khoa Học và Kỹ Thuật Máy Tính}
+		\end{tabular}
+	\end{tabular}
+}
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\bf \small \color{black!65!blue} \fontfamily{cmtt}\selectfont  \textsl{} Luận văn tốt nghiệp}
+\fancyfoot[R]{\bf \small \color{black!65!blue} \fontfamily{cmtt}\selectfont Trang {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\graphicspath{{images/}}
+
+%-----------------SET PARAMS----------------------------------
+\tikzset{
+  treenode/.style = {shape=rectangle,
+                     draw, align=center,
+                     top color=white, bottom color=blue!20},
+  root/.style     = {treenode, font=\Large, bottom color=red!30},
+  env/.style      = {treenode, font=\ttfamily\normalsize},
+  dummy/.style    = {circle,draw}
+}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\setlength{\parindent}{20pt}
+
+\lstset{frame=tb,
+	language=Python,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+%---------------END OF SET PARAMS---------------------------
+
+\begin{document}
+
+%---------------SET FOR DIAGRAM------------------------------
+\usetikzlibrary{arrows,chains,positioning,scopes}
+
+\tikzset{
+	block/.style={draw,thick,text width=5em,minimum height=6.5em,minimum width=5em,align=center},
+	arrow/.style={->, thick}
+}
+
+%------------------TITLE PAGE-----------------------------------
+\begin{titlepage}
+
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness hereffff
+
+	\center % Center everything on the page
+
+	%----------------------------------------------------------------------------------------
+	%	HEADING SECTIONS
+	%----------------------------------------------------------------------------------------
+	\begin{flushright}
+	\end{flushright}
+	{\Large TRƯỜNG ĐẠI HỌC BÁCH KHOA TPHCM\\
+		KHOA KHOA HỌC \& KỸ THUẬT MÁY TÍNH\\}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=3.5 cm, height=3.5 cm]{image/LogoBK.jpg}
+			\includegraphics[width=3.5 cm, height=3.5 cm]{image/cse.png}
+		\end{figure}
+		\textsc{\huge \color{red} LUẬN VĂN TỐT NGHIỆP}\\[0.2cm] % Minor heading such as course title
+
+		%----------------------------------------------------------------------------------------
+		%	TITLE SECTION
+		%----------------------------------------------------------------------------------------
+		\HRule \\[0.4cm]
+		{ \huge \bfseries \textcolor{blue}{Đếm số lượng người \\ trong cuộc họp}}\\[0.4cm] % Title of your document
+		\HRule \\[0.4cm]
+
+		%----------------------------------------------------------------------------------------
+		%	AUTHOR SECTION
+		%----------------------------------------------------------------------------------------
+		\begin{flushright}
+			\begin{minipage}{0.7\textwidth}
+
+			\end{minipage}
+		\end{flushright}
+
+		\begin{table}[h]\large
+			\centering
+			\begin{tabular}{lll}
+				\\
+				Giảng viên hướng dẫn: & PGS. TS. NGUYỄN THANH BÌNH &         \\
+				Giảng viên phản biện: & PGS. TS. LÊ HỒNG TRANG & \\
+				Sinh viên thực hiện:
+				                              & LÊ HOÀNG KIM       & 1611712 \\
+				                              & ĐÀO MẠNH HÙNG   & 1611384 \\
+				                              & PHAN THAO            & 1613135
+				\\
+			\end{tabular}
+		\end{table}
+
+		\begin{flushleft} \large
+			\vspace{5em}
+			\centering
+			{\footnotesize TP. Hồ Chí Minh, tháng 7 năm 2020}
+		\end{flushleft}
+
+		\vfill % Fill the rest of the page with whitespace
+
+		\end{titlepage}
+		%----------------END TITLE PAGE--------------------
+		%\pagenumbering{gobble}
+		%\setcounter{page}{1}
+		%\pagenumbering{arabic}
+		\newpage
+		\thispagestyle{empty}
+
+		\tableofcontents
+		\newpage
+		\listoffigures
+		\newpage
+		\section{Giới thiệu}
+		\subsection{Giới thiệu đề tài}
+
+\indent Trí tuệ nhân tạo, thị giác máy tính, học sâu,... nổi lên như những công nghệ “hot" trong thời gian gần đây với hàng triệu lượt tìm kiếm. Cùng với sự bùng nổ của cách mạng 4.0, những công nghệ này ngày càng được quan tâm cũng như được đầu tư để áp dụng rộng rãi trong nhiều lĩnh vực khác nhau, từ tự động hoá cho đến logistics.\\
+
+Ngày nay các vấn đề giám sát an ninh tại các nơi công cộng có đông người  ngày càng được chú ý nhiều hơn do sư phát triển của AI, từ đó các yêu cầu về đếm số người cũng được tăng lên nhanh chóng. Đếm số lượng người ra vào là một thực hành thiết yếu để hiểu số lượng người mua sắm đến các cửa hàng, số lượng các công nhân ra vào nhà máy, hoặc học sinh, sinh viên đến trường. Từ đó,  chúng ta có thể biết được các khu vực lượng người ra vào đông nhất, khung giờ mà tần suất qua lại gia tăng. Có được những thông tin trên, các cửa hàng, nhà máy, xí nghiệp có thể tận dụng để điều khiển nguồn nhân lực hợp lý, tránh tình trạng ùn ứ, tắc nghẽn đám đông, cũng như đảm bảo công việc được tiến hành đúng tiến độ, không thiếu hụt nguồn nhân công. Việc nắm rõ số người ở từng thời điểm trong ngày còn giúp các nhà lãnh đạo đưa ra thời gian biểu phù hợp (thời gian ca làm, thời điểm nghỉ ngơi,...) cho tổ chức. Nắm được số lượng người ở các sân vận động hoặc trong một buổi hoà nhạc cũng có thể cho thấy độ hấp dẫn của buổi diễn, ngoài ra các phương pháp đếm số lượng người còn có thể kiểm soát người ra vào các khu vực cấm hoặc môi trường độc hại.\\
+
+Bài toán đếm số người được biết đến với một ngữ cảnh rộng kéo theo đó là những phương pháp tiếp cận khác nhau trong mỗi tình huống. Việc thống kê, giám sát tại các buổi họp, hội nghị, chương trình, buổi lễ,... nơi mà việc kiểm tra bằng mắt thường hay các phương pháp thủ công là không khả thi hoặc tốn thời gian khá đáng kể, do đó cần đòi hỏi các cách tiếp cận hiện đại hơn. \\
+
+Các phương pháp thống kê số lượng truyền thống như ghi phiếu điểm danh, quét mã,... gặp khó khăn khi số lượng người trong một cuộc họp, chương trình là quá lớn. Việc điểm danh cho từng người cũng chiếm khoảng thời gian tương đối, dẫn đến việc điểm danh có thể gây ra tắc nghẽn khi số lượng cần điểm danh tăng lên đột biến, chưa kể những sự cố có thể xảy ra trong quá trình điểm danh, làm chậm tiến độ của các chương trình, sự kiện.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.1]{image/JF.JPG}
+        \caption{Điểm danh tại hội chợ việc làm CSE Job Fair 2019 \cite{BTT}}
+        \label{fig:my_label}
+    \end{figure}
+
+Vấn đề này yêu cầu các biện pháp thống kê số lượng tốt hơn, và việc đếm số lượng người thông qua các bức ảnh ra đời như một hệ quả tất yếu. Áp dụng công nghệ mới thay thế các giải pháp truyền thống đang là một trong những xu hướng tất yếu của thế giới, khi mà yêu cầu về số lượng lớn cần được đáp ứng trong thời gian ngắn mà vẫn đưa ra được kết quả chính xác. Tuy công nghệ mới khi được áp dụng sẽ gặp những khó khăn trong thời gian đầu phát triển nhưng khi hoàn thiện sẽ cho kết quả nhanh và bao quát. \\ \\
+
+Trong các ngữ cảnh có thể áp dụng được các công nghệ A.I., thì việc đếm số lượng người trong một cuộc họp được nhóm đánh giá là phù hợp với phạm vi đề cương luận văn tốt nghiệp. Ở các cuộc họp quy mô vừa và nhỏ, yêu cầu về việc kiểm soát số lượng người tham gia, cũng như việc có cái nhìn tổng quát để nắm rõ thông tin, dễ quản lý,... là rất cần thiết. Quy mô của một cuộc họp lại là không quá lớn so lớn với việc xử lý một bức ảnh chụp từ một sân vận động có sức chứa lên đến hàng chục nghìn người, yêu cầu độ tỉ mỉ cũng như sự chính xác cao. Việc nắm rõ các lý thuyết cơ bản cũng như xây dựng, hoàn thiện phương pháp đếm số lượng người trong cuộc họp sẽ tạo nền tảng cho nhóm mở rộng đề tài ra những ngữ cảnh phức tạp, đòi hỏi sự tỉ mỉ cao hơn, chẳng hạn như các cuộc họp Quốc hội, những buổi seminar đông người hoặc thậm chí là các buổi diễn ca nhạc hoành tráng.
+\newpage
+
+		\subsection{Mục tiêu, nội dung đề tài}
+Mục tiêu của đề tài là xây dựng được một thuật toán có khả năng đọc đầu vào là một bức ảnh có bối cảnh là một cuộc họp, sau đó tính toán và đưa ra kết quả là số lượng người trong bức ảnh. Cuộc họp ở đây được xác định như một đám đông đang bàn luận về công việc. Những người trong cuộc họp có thể đứng hoặc ngồi tuỳ ý, tuy nhiên mật độ người trong cuộc họp phải đồng đều và không quá đông, đặc biệt đa số người tham gia cuộc họp thường sẽ cùng nhìn về một phía (về phía người thuyết trình hoặc màn hình chiếu,...). Điều này tạo thuận lợi cho việc một camera được lắp đặt trước có thể chụp một tấm ảnh bao quát cuộc họp, trong đó không hoặc ít ai bị che khuất, tạo điều kiện thuận lợi cho các giải thuật đếm số lượng người đưa ra kết quả chính xác.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale = 0.3]{image/meeting.jpg}
+        \caption{Một cuộc họp đơn giản \cite{DataSet}}
+        \label{fig:my_label}
+    \end{figure}
+
+Với mục tiêu được đề ra bên trên, nội dung đề tài sẽ xoay quanh việc tìm hiểu các kiến thức nền tảng, các giải thuật liên quan, tạo được một tập dữ liệu phù hợp và phát triển phương pháp của nhóm. Các kiến thức liên quan tuy không quá nhiều nhưng để hiểu và áp dụng được thì cần phải đào sâu nghiên cứu kỹ càng, nhất là những hiểu biết cơ bản về xử lý ảnh, thị giác máy tính và học máy. Muốn giảm bớt công sức khi nghiên cứu thì việc tìm hiểu các phương pháp đã được thực hiện từ trước là một ý tưởng không tồi, giúp tiết kiệm được thời gian, đưa nhóm đi đúng hướng đồng thời cũng củng cố nền tảng kiến thức. Trong số nhiều giải thuật được đề xuất, việc xác định tính phù hợp với ngữ cảnh, yêu cầu bài toán, cũng như độ tối ưu của giải thuật là điều cần lưu ý, đặc biệt là ưu nhược điểm của chúng đối với bài toán đang xem xét. Đối với các giải thuật khác nhau lại yêu cầu nhiều tập dữ liệu ảnh, video khác nhau, tuỳ vào tính chất thuật toán. Các tập dữ liệu này lúc thu thập thường chỉ là dữ liệu thô, cần có sự chắt lọc, “mài dũa", cụ thể ở đây là việc dán nhãn (label) cho chúng. Sau khi có được nguồn dữ liệu chuẩn, nhóm có thể bắt đầu vào việc phát triển mô hình của nhóm dựa trên các yếu tố trên.
+
+		\subsection{Giới hạn đề tài}
+Với quy mô đề cương luận văn tốt nghiệp, nhóm quan tâm đến quy mô các bức ảnh cỡ vừa và nhỏ (các cuộc họp nhỏ ở công ty, họp mặt gia đình, bạn bè,...) phù hợp với mục đích nghiên cứu, hiểu rõ bản chất của các quá trình, giải thuật, từ đó đưa ra thêm các hướng cải tiến, tối ưu hệ thống nhằm đạt được nhiều sự chính xác cũng như cải thiện tốc độ thuật toán. Từ đó có thể phát triển ra các tập dữ liệu lớn hơn (sân vận động, các cuộc họp lớn,...) yêu cầu nhiều sự chính xác và tỉ mỉ hơn.
+		\section{Cơ sở lý thuyết và các nghiên cứu liên quan}
+		\subsection{Cơ sở lý thuyết}
+		    \subsubsection{Histogram}
+
+		    Một histogram là một đồ thị, phản ánh chính xác sự phân bố tần số của một tập dữ liệu, cụ thể ở đây là các điểm ảnh, được giới thiệu bởi Karl Pearson. \\
+
+Để tạo ra một histogram, bước đầu tiên là xác định một tập giá trị cố định, tập này phải chứa các giá trị liên tiếp tăng dần, không chồng chéo. Sau đó đếm số lượng xuất hiện (tần số) của từng giá trị trong miền đó, từ đó có thể quan sát độ dị biệt, độ trôi, độ nhọn của tập dữ liệu.\\
+
+Trong việc nghiên cứu ảnh số, thì tập giá trị này thường sẽ là độ lớn của các điểm ảnh, cụ thể khi nghiên cứu ảnh xám (trắng đen), sẽ là [0, 255]. \\
+Histogram có thể được ứng dụng để cân bằng các ảnh quá sáng hoặc quá tối, giúp cho bức ảnh được hài hoà hơn thông qua các phép chuẩn hoá histogram.
+ \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{image/light.png}
+        \caption{Ảnh sáng có cường độ các pixel tập trung ở gần 255 \cite{HistPicture}}
+        \label{fig:my_label}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{image/dark.png}
+        \caption{Ảnh tối có cường độ các pixel tập trung ở gần 0 \cite{HistPicture}}
+        \label{fig:my_label}
+    \end{figure}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.7]{image/good.png}
+        \caption{Ảnh sau khi chuẩn hoá có cường độ các pixel phân bố đều \cite{HistPicture}}
+        \label{fig:my_label}
+    \end{figure}
+\subsubsection*{HOG (Histogram of Oriented Gradients)}
+HOG là histogram dựa theo hướng theo hướng gradient và là một ‘feature descriptor’. Feature descriptor là một biểu diễn của ảnh sau khi đã rút trích được các đặc trưng và loại bỏ những thông tin không hữu ích.  Ảnh sẽ được chia thành các vùng nhỏ gọi là “cell”, tại đó ta tính toán histogram về hướng gradient trên từng pixel của cell. Tổng hợp các histogram đó lại sẽ được biểu diễn mới dựa trên ảnh ban đầu. Để tăng cường hiệu năng nhận dạng, các histogram cục bộ có thể được chuẩn hóa về độ tương phản bằng cách tính một ngưỡng cường độ trong một vùng lớn hơn cell, gọi là các khối (blocks) và sử dụng giá trị ngưỡng đó để chuẩn hóa tất cả các cell trong khối. Một histogram thường được chia thành 9 ngăn (bins) từ góc 0 đến 180 độ tương ứng với mỗi ngăn 20 độ.
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/hungdao.png}
+     \caption{Ảnh gốc \label{Fig:hog_ori}}
+   \end{minipage}
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/hungdao_hog.png}
+     \caption{Ảnh sau khi trích xuất HOG \label{Fig:Hog_extract}}
+   \end{minipage}
+\end{figure}
+
+
+\subsubsection{Joint HOG}
+Được giới thiệu như là một phiên bản cải thiện của các đặc trưng (feature) liên quan đến việc sử dụng thông tin gradient của đối tượng như HOG feature đã được trình bày ở trên hoặc Haar like feature \cite{Robusts Face Detetion}. Joint HOG được tạo nên bằng việc kết hợp các HOG features lại với nhau để tận dụng tính đối xứng và liên tục tại các phần đường viền tạo nên hình dáng của đối tượng để tăng t
+ính chính xác cho nhận diện. Đặc biệt nếu dùng cho các bộ phận của hình dạng các bộ phận của con nguời - đối tượng của đề tài hướng tới. Đặc trưng Joint HOG là một vector đặc trưng HOG bao gồm hai vector đặc trưng HOG cùng kích thước. Với $b_i$ và $b_j$ lần lượt tương ứng block $i$ và block $j$, ta sẽ thu được biểu thức Joint HOG của mẫu dữ liệu $x$ như sau:
+\begin{equation}
+    H_{(b_i, b_j)}(x)
+\end{equation}
+Chọn hướng gradient trong khoảng từ 0 đến 180 \degree với 9 bin mỗi bin 20 \degree sửa dụng không gian hướng 9 bin, ta được đặc trưng Joint Hog của 2 block $b_i$ và $b_j$ với vector đặc trưng HOG $H_b(x)$ như sau:
+\begin{equation}
+    H_{(b_i, b_j)}(x) = [H_{b_i}(x), H_{b_j}(x)]
+\end{equation}
+		          \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.7]{image/jointhog.png}
+                    \caption{Minh họa việc trích xuất đặc trưng Joit HOG \cite{Head-shoulder}}
+                    \label{fig:my_label}
+                \end{figure}
+            \subsubsection{Support Vertor Machine (SVM) \cite{SVM}}
+ Máy vectơ hỗ trợ là một khái niệm trong thống kê và khoa học máy tính cho một tập hợp các phương pháp học có giám sát liên quan đến nhau để phân loại và phân tích hồi quy. SVM dạng chuẩn nhận dữ liệu vào và phân loại chúng vào hai lớp khác nhau. Do đó SVM là một thuật toán phân loại nhị phân. Với một bộ các ví dụ luyện tập thuộc hai thể loại cho trước, thuật toán luyện tập SVM xây dựng một mô hình SVM để phân loại các ví dụ khác vào hai thể loại đó. Một mô hình SVM là một cách biểu diễn các điểm trong không gian và lựa chọn ranh giới giữa hai thể loại sao cho khoảng cách từ các ví dụ luyện tập tới ranh giới là xa nhất có thể. Các ví dụ mới cũng được biểu diễn trong cùng một không gian và được thuật toán dự đoán thuộc một trong hai thể loại tùy vào ví dụ đó nằm ở phía nào của ranh giới.
+
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.7]{image/svm.png}
+                    \caption{H3 (màu xanh lá cây) không chia tách hai lớp dữ liệu. H1 (màu xanh lơ) phân tách hai lớp với lề nhỏ và H2 (màu đỏ) phân tách với lề cực đại. \cite{SVM}}
+                    \label{fig:my_label}
+                \end{figure}
+    Xét bài toán phân loại tuyến tính nhận vào dữ liệu $(x_i, y_i)$ với $1 \leq i \leq N$ trong đó vector $x$ thể hiện thông tin của mẫu dữ liệu và $y$ là nhãn của mẫu dữ liệu $x$, vector trọng số $w$ và độ dời $b$ phương trình mặt phân chia của các lớp có dạng.
+    \begin{equation}
+    wx + b
+\end{equation}
+Để xây dựng bộ phân loại SVM cần thực hiện viết thành lập phương trình mặt phân chia giữa các lớp dữ liệu tức đi tìm cặp hệ số $(w, b)$ và không dừng lại ở đó mà cần phải tối ưu bộ phân loại SVM bằng cách tối đa hóa khoảng cách từ các điểm dữ liệu ở các lớp đến mặt phẳng phẩn loại. Với margin được tính là khoảng cách gần nhất từ 1 điểm tới mặt phân loại, ta cần tìm cặp hệ số $(w, b)$ sao cho margin đạt giá trị lớn nhất. Sau khi giải bài toán đối ngẫu Lagrange ta có được bộ phân loại
+\begin{equation}
+f(x) = sign\{\sum_{n=1}^{N} \alpha_i y_i x_i x + b \}
+\end{equation}
+Với $\alpha_i$ là hệ số tương ứng với support vector $x_i$
+
+\subsubsection{AdaBoost \cite{AdaBoost}}
+
+\subsubsubsection{Tổng quan về AdaBoost}
+
+Được viết tắt từ “adaptive boosting” (tăng tốc thích nghi), đây là một giải thuật heuristic  tạo ra bởi Yoav Freund và Robert Schapire và có thể được kết hợp với nhiều thuật toán khác để nâng cao hiệu quả. AdaBoost là một thuật toán boosting dùng để xây dựng bộ phân lớp (classifier). Như chúng ta đã biết, một classifier nhận vào một tập dữ liệu để học và cố gắng dự đoán hay phân lớp mẫu dữ liệu mới thuộc về phân lớp nào. \\ \\
+Boosting là thuật toán học quần thể bằng cách xây dựng nhiều thuật toán học cùng lúc (ví dụ như cây quyết định) và kết hợp chúng lại. Mục đích là để có một cụm hoặc một nhóm các weak learner sau đó kết hợp chúng lại để tạo ra một strong learner duy nhất. \\ \\
+Có thể hiểu đơn giản weak learner phân loại với độ chính xác hầu như không cao. Một ví dụ phổ biến của weak learner là cây quyết định một cấp (decision stump). Ngược lại, strong leaner có độ chính xác cao hơn nhiều do được tổng kết từ nhiều weak learner khác. AdaBoost có sự “thích nghi" khi những weak learner tiếp theo sẽ chú trọng vào những mẫu đã bị phân loại sai từ trước đó. Từng cá thể learner có thể “weak", nhưng miễn là việc phân loại của chúng cho kết quả tốt hơn từ việc đoán ngẫu nhiên thì các weak learner vẫn có thể tạo ra một strong learner cho bài toán. \\ \\
+Tất cả các giải thuật học máy đều có xu hướng phù hợp để giải quyết một vấn đề nhất định nào đó tốt hơn các giải thuật khác, do đó chúng thường có những tham số khác nhau và sự tuỳ chỉnh cho phù hợp để đạt được kết quả tốt trên một tập dữ liệu. Do đó, giải thuật adaboost như một cây quyết định có các lá là các weak learner, cho ra kết quả tốt nhất có thể đạt được từ chúng. \\ \\
+Huấn luyện (train) một tập các lớp phân loại như sau:
+\begin{equation}
+    F_{t}(x) = \sum_{t=1}^{T}f_{t}(x)
+\end{equation}
+
+Mỗi $f_t$ là một weak learner có $x$ là dữ liệu đầu vào và trả về lớp được phân loại của nó. Ví dụ chúng ta có một bài toán phân loại hai lớp, thì dấu (+/-) của kết quả phán ánh dự đoán lớp, còn giá trị tuyệt đối của kết quả thể hiện độ chính xác của việc phân loại (càng lớn càng đúng). Mỗi weak learner cho ra một kết quả dự đoán $h(x_{i})$ cho mỗi mẫu trong tập huấn luyện. Tại mỗi lần thử $t$, một weak learner được lựa chọn và được gán với một  hệ số $\alpha_{t}$  phù hợp để tổng lỗi huấn luyện $E_t$ tại giai đoạn $t$ là nhỏ nhất.
+\begin{equation}
+    E_t = \sum_{i}^{}E[F_{t-1}(x_i) + \alpha_th(x_i)]
+\end{equation}
+
+Ở đây $F_{t-1}(x)$ là một bộ phân loại đã được “boost" tạo ra ở giai đoạn trước của việc huấn luyện. $E(F)$ là các hàm định nghĩa lỗi và $f_{t}(x) = \alpha_{t}h(x)$ được xem xét đưa vào bộ phân loại cuối cùng.
+\subsubsubsection{AdaBoost trong việc lựa chọn feature}
+Như đã đề cập ở phần trước việc xây dựng trên một quần thể các wweak learner hay còn gọi là weak classifier, trong phần này sẽ giải thích chi tiết việc lựa chọn và xây dựng các weak learner. Xét bài toàn nhận diện đối tượng là con người, các bộ phận trên cơ thể con người có thể được kết hợp để đưa ra quyết định phân loại cuối cùng, với mỗi bộ phận sẽ có rất nhiều các loại đặc trưng khác nhau và tương tự chúng ta cần kết hợp chúng để đưa ra kết quả phân loại. Vì
+thế việc xây dựng bộ phân lọại yếu chính là đi lựa chọn những đặc trưng tốt nhất cho bộ phân loại cuối cùng.
+
+Với dữ liệu đầu vào là tập $n$ mẫu dương và $m$ mẫu âm được dán nhãn trước đó, chúng ta sẽ tiến hành khởi tạo weight mỗi mẫu dương và mỗi mẫu âm lần lượt là $\frac{1}{2n}$ và $\frac{1}{2m}$. Tiến hành việc huấn luyện cho hai tập dữ liệu trên số lượng đặc trưng được xác định trước, sau đó tính toán lỗi trên của bộ phân loại tương ứng với đặc trưng bằng cách cộng weight của tất cả các mẫu bị phân loại sai (missclassified). Sau đó thêm vào bộ phân loại của đặc trưng có hàm lỗi thấp nhất cùng với hệ số của nó vào trong quần thể các bộ phân loại yếu. Lặp lại quá trình cho đến khi đạt đủ số lượng của weak learner.
+\begin{algorithm}[H]
+\caption{AdaBoost}
+\begin{algorithmic}[1]
+\STATE Give $n$ positive and $m$ negative samples $x_1,...,x_n, x_{n+1},...,x_{n+m}$
+\STATE The weights of the images are initialized to $\frac{1}{2n}$ for the positive set and $\frac{1}{2m}$ for the negative set
+\FOR {$t = 1$ to $T$}
+\STATE The weights are normalized so that they sum to unity: \\
+\begin{center}
+$w_{i, t} \leftarrow \frac{w_{i,t}}{\sum_{j=1}^{n+m} w_{j,t}}$
+\end{center}
+\STATE Calculate the error of all the weak classifiers by evaluating each one against all samples in the training set and adding the weight of misclassified sample to the overall error $\epsilon_j$ of the classifier $h_j$:\\
+\begin{center}
+ $\epsilon = \sum_{i}w_i|h_j(x_i) - y_i|$
+ \end{center}
+\STATE Choose the classifier $h_t$ with the lowest error
+\STATE Update the weights that are classified correctly inversely proportional to the error of the chosen classifier:\\
+\begin{center}
+    $w_{t+1,i} = w_{t,i}\beta^{1 - \epsilon_i}$ \\
+\end{center}
+
+where $\epsilon = 0$ if sample $x_i$ is classified correctly and 1 otherwise. $\beta_t = \frac{\epsilon_t}{1-\epsilon_t}$
+\ENDFOR
+\STATE The final strong classifier is:
+\begin{center}
+    $$h(x) = \begin{cases} 1 & \sum_{t=1}^T\alpha_th_t(x) \geq \frac{1}{2}\sum_{t=1}^T\alpha_t\\
+    0 & otherwise \end{cases} $$
+\end{center}
+where $\alpha_t = \log\frac{1}{\beta_t}$
+\end{algorithmic}
+\end{algorithm}
+Bộ phân loại cuối cùng thu được bằng phương trình $h(x)$ còn được biết tới là một threshold function. Threshold function là một hàm quyết định xem một mẫu cho trước sẽ được phân loại vào lớp nào dựa vào kết quả đầu ra của một bộ phân loại tuyến tính nhị phân. Trong trường hợp chúng ta đang xét là giải thuật Adaboost thì giá trị threshold tiêu chuẩn là $\frac{1}{2}\sum_{t=1}^T\alpha_t$.
+\subsubsection{Cascade classifier}
+Việc sử dụng nhiều bộ phân loại để tăng cường độ chính xác của các mô hình học máy là một lĩnh vực nghiên cứu thiết thực được biết đến rộng rãi. Phương pháp Cascade được biết đến là một trong số đó bằng việc kết hợp nhiều bộ phân lại với nhau để đưa ra bộ phân loại cuối cùng. Ý tưởng cơ bản của phương pháp là sử dụng một chuỗi tuần tự  tập hợp các bộ phân loại tương ứng với một chuỗi nhiều cấp độ (level) hay các tầng (layer) phân loại nối tiếp nhau. Từ kết quả dự đoán của tổ hợp các bộ phân loại ở tầng trước đó làm nền tảng cho việc phân loại ở các tầng tiếp theo.
+
+Xét bài toán nhận diện đối tượng, đa phần cần trải qua rất nhiều đặc trưng để có thể kết luận. Ý tưởng của phương pháp nhắm tới là qua mỗi tầng của bộ phân loại, các đặc trưng sẽ được thêm vào để xem xét, các đặc trưng ở các tầng cao hơn sẽ sử dụng được kết quả phân loại của các đặc trưng ở các tầng thấp hơn để tạo ra một bộ phân loại hoàn chỉnh và đầy đủ.
+
+\subsubsection{Adaboost Cascade}
+Trong thực tế, Cascade thường được sử dụng kết hợp với cascade và bộ phân loại Adaboost Cascade đầu tiên được giới thiệu vào năm 2001 bởi  Paul Viola và Michael Jones. Ý tưởng ban đầu của giải thuật nhằm loại bỏ một số lượng lớn các mẫu âm càng sớm càng tốt trước khi bước qua các bộ phân loại phức tạp về sau. Điều này xuất phát từ việc tăng cường hiệu năng nhận diện và giảm thời gian tính toán càng nhiều càng tốt, vì số lượng các vùng nền (các mẫu âm) trong các bức ảnh là áp đảo so với đối tượng cần nhận diện (mẫu dương). Bên cạnh đó cũng phải đảm bảo việc nhận diện chính xác hầu hết các mẫu dương tức là tỉ lệ nhận diện phải cao (high detection rate)
+đồng nghĩa với tỉ lệ bỏ sót phẩi rất thấp (low negative rate)
+
+Mỗi tầng (Stage) trong bộ phân loại Cascade là một bộ phân loại AdaBoost. Các mẫu dữ liệu khi được đưa vào bộ phân loại sẽ được phân loại tuần tự qua các tầng tương ứng với các bộ phân loại mạnh (strong classifier) được tạo nên bởi AdaBoost, ngay khi mẫu dữ liệu được phân loại âm bởi một trong các tầng thì nó sẽ được kết luận là mẫu âm trong khi đó để được kết luận là mẫu dương thì nó phải được phân loại dương bởi tất cả các tầng của bộ phân loại. Mô hình tổng thể của giải thuật có thể được xem như là một cây quyết định thoái hóa (xem hình \ref{fig:ada_cascade}). Qua đó ta có thể thấy các bộ phân loại ngày càng sẽ đối mặt với nhiệm vụ khó hơn khi vẫn phải đảm bảo việc nhận dạng chính xác các mẫu dương bên cạnh đó là phải phân loại được một số lượng tương đối các mẫu âm "khó" (các mẫu âm đã qua mặt được các bộ phân loại trước đó).
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.7]{image/cascade_flow.png}
+                    \caption{Tổng thể của quá trình phân loại sử dụng Adaboost Cascade}
+                    \label{fig:ada_cascade}
+                \end{figure}
+Thiết kệ bộ phân loại Cascade cần trải quả một tập hợp của việc nhận dạng và đạt được các mục tiêu về kết quả của việc phân loại. Số lượng tầng (stage) của Cascade và kích thước của chúng cần phải đủ để đạt được các mục tiêu được đề ra nhưng vẫn phải đảm bảo tối thiểu hóa việc tính toán. \\
+Với quá trình huấn luyện bộ phân loại Cascade, tỉ lệ báo động nhầm (False positive rate) của bộ phân loại được tính như sau
+\begin{equation}
+    F = \prod_{i=1}^{K} f(i)
+\end{equation}
+Với $K$ số tầng của bộ phân loại và $f_i$ tương ứng với tỉ lệ báo động nhầm (false positive rate) ở tầng thứ $i$. Tương tự là tỉ lệ nhận diện của bộ phân loại với $d_i$ là tỉ lệ nhận diện ở tầng thứ $i$ sẽ được tính như sau
+\begin{equation}
+    D = \prod_{i=1}^{K} d(i)
+\end{equation}
+Thước đo chính của mỗi bộ phân loại là tỉ lệ nhân diện dương chính xác (true positive rate). Trong khi đó quá trình của mỗi bộ phân loại trong hệ thống Cascade là một AdaBoost, một bộ phân loại cố gắng để đạt được giá trị lỗi nhỏ nhất (minimize error) và không được thiết kế để đạt được tỉ lệ nhận diện cao và chấp nhận chi phí báo động nhầm lớn (false positive rates). Có một phương pháp đơn giản và thuận tiện để đạt được điều này đó là điều chỉnh ngưỡng (threshold) của perceptron do AdaBoost tạo ra. Giá trị ngưỡng càng cao sẽ cho ra bộ phân loại với tỉ lệ báo động nhầm (False positive rate) ít hơn đồng thời tỉ lệ nhận diện chính xác (detection rate) cũng thấp hơn, ngược lại việc điều chỉnh giá trị ngưỡng thấp hơn sẽ làm cho tỉ lệ nhận diện chính xác cao hơn và kéo theo đó là tỉ lệ báo động nhầm cũng sẽ cao hơn.
+Giá trị ngưỡng tiêu chuẩn được giới thiệu đối với giải thuật AdaBoost là
+\begin{equation}
+\frac{1}{2} \sum_{t=1}^{T}\alpha_t
+\end{equation}
+Nhưng giá trị này không thật sự tốt trong bài toán tối thiểu hóa giá trị tỉ lệ báo động nhầm và tối ưu tỉ lệ nhận diện đến giá trị mong muốn. Thay vì việc sử dụng threshold cố định cho từng tầng (stage), chúng ta cần có giải thuật cho việc này để chọn được giá trị tối ưu. Đầu tiên chúng ta cần đặt giá trị cần đạt được cho tỉ lệ nhận diện chính xác và tỉ lệ báo động nhầm, khởi tạo giá trị ngưỡng bằng giá trị cực đại của nó ($ \sum_{t=1}^{T}\alpha_t $,
+tức là tất cả các mẫu được phân loại dương). Sau đó tiến hành giảm giá trị ngưỡng thật chậm cho đến khi đạt được tỉ lệ nhận diện mong muốn. Trong quá trình đó nếu sau khi đạt được tỉ lệ nhận diện mong muốn nhưng  tỉ lệ báo động nhầm vẫn chưa đạt (cao hơn giá trị mong muốn) thì tiếp tục sinh thêm bộ phân loại từ giải thuật AdaBoost và lặp lại quá trình trên cho tới khi thỏa điều kỉện của hải tiêu chí đo lường là tỉ lệ nhận diện chính xác và tỉ lệ báo động nhầm. Trong thực tế nếu thực hiện việc giảm giá trị ngưỡng như vậy sẽ tốn chi phí cực kỳ lớn, mỗi khi tính toán lại giá trị ngưỡng ta cần đánh giá lại toàn bộ tập dữ liệu, cộng với việc giá trị ngưỡng chỉ được giảm thật chậm và ngày càng lớn dần sẽ dẫn tới việc chũng ta cần rất nhiều lần đánh giá lại toàn bộ tập dữ liệu điều này khiến cho thời gian tính toán không thể chấp nhận được. Vì thế một phương pháp khác để tìm kiếm giá trị ngưỡng được đưa ra để giảm thiểu tối đa thời gian tính toán là sử dụng giải thuật tìm kiếm nhị phân.
+Điều này giúp cho việc điều chỉnh giá trị ngưỡng chỉ mất trung bình 25 lần lặp để tìm được giá trị thích hợp nhỏ hơn rất nhiều lần so với việc giảm dần giá trị threshold.
+\begin{algorithm}[H]
+\caption{Adjust threshold for each stage}
+\begin{algorithmic}[1]
+\STATE Set Detection rate target $D_{target}$ and $F_{target}$ for system
+\STATE Set Detection rate $D$ and False positive Rate $F$ for this stage
+\WHILE{$F$ < $F_{target}$}
+\STATE Add classifier to the stage using AdaBoost
+\STATE Set $lowerBound = 0$ and $upperBound = \sum_{t=1}^{T}\alpha_t$
+\STATE Set $threshold = (lowerBound + upperBound)/2$
+\WHILE {$upperBound - lowerBound 	\approx  0$}
+\IF {$D < D_{target}$}
+\STATE $upperBound = threshold$
+\STATE $threshold = (lowerBound + threshold)/2$
+\ELSIF {$D \geqslant D_{target}$}
+\STATE $lowerBound= threshold$
+\STATE $threshold = (upperBound + threshold)/2$
+\ENDIF
+\ENDWHILE
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+Cuối cùng, tổng hợp lại các vấn đề được nêu trên chúng ta sẽ có một giải thuật tổng thể cho bộ phân loại AdaBoost Cascade như sau
+\begin{algorithm}[H]
+\caption{The AdaBoost Cascade using SVM classifier}
+\begin{algorithmic}[1]
+\REQUIRE Number of feature for each classifier in AdaBoost ensemble $N_{features}$
+\STATE Set $F_{target}$ for system
+\STATE Set minimum acceptable detection rate $d_{min}$ and maximum acceptable false positive rate $f_{max}$ per cascade level
+\STATE Initial positive set (Pos) and negative (Neg)
+\STATE Initial $ i = 0, D_i = 1, F_i = 1$
+\WHILE{$F_i$ > $F_{target}$}
+\STATE $ i = i + 1$
+\STATE $ f_i = 1$
+\WHILE {$f_i > f_max$}
+\STATE Train $N_{features}$ linear SVMs using Pos and Neg samples
+\STATE Add the best SVM (lowest error) classifier into the strong classifier.
+\STATE Update AdaBoost weight for all samples in Pos and Neg set
+\STATE Evaluate Pos and Neg by current strong classifier to obtain $f_i$ and $d_i$
+\STATE Using adjust threshold algorithm to achieve the target value of $d_i$
+\STATE Calculate $f_i$ base on new threshold.
+\ENDWHILE
+\STATE $F_i = F_i \times f_i$
+\STATE $D_i = D_i \times d_i$
+\STATE Empty Neg set
+\STATE Evaluate the current cascaded detector on the negative set, then add misclassified sample into Neg set
+\ENDWHILE
+\STATE Finally, get the $i$ - level Cascade, each layer has a Adaboost classifier of SVM  ensemble and final $F_i$ and $D_i$
+\end{algorithmic}
+\end{algorithm}
+\subsubsection{Image Pyramid \cite{pyramid}}
+Kim tự tháp ảnh (image pyramid) là một hình thức thay đổi kích thước bức ảnh theo một "scale" nhất định. Việc tạo ra một kim tự tháp ảnh cho phép chúng ta tìm các đối tượng trong một bức ảnh với nhiều kích thước khác nhau của nó.Và khi kết hợp với một "cửa sổ trượt" (sliding windows), chúng ta có thể xác định vị trí của các đối tượng trong ảnh tại các mức của kim tự tháp ảnh.
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.7]{image/pyramid_example.png}
+                    \caption{Một ví dụ về kim tự tháp ảnh, tại mỗi tầng của kim tự tháp, bức ảnh sẽ được giảm kích thước và (có thể) được làm sắc nét.}
+                    \label{fig:my_label}
+                \end{figure}
+
+Tại đáy của kim tự tháp, chúng ta có bức ảnh gốc với kích thươc ban đầu, sau đó, tại các tầng phía trên, bức ảnh được thay đổi kích thước (trở nên nhỏ hơn) theo một tỉ lệ nhất định. Trong một vài trường hợp, bức ảnh có thể được làm rõ nét nhờ công nghệ làm mờ Gaussian.
+
+Bức ảnh sẽ dần dần nhỏ đi khi lên các tầng cao hơn cho đến khi nó đạt đỉnh, lúc này kim tự tháp sẽ đạt được điều kiện dừng của nó khi đã tạo ra được bức ảnh có kích thước nhỏ nhất trên đỉnh và không cần tiếp tục việc thu nhỏ.
+
+Sau đây chúng ta xem xét việc tạo ra một kim tự tháp ảnh đơn giản với Python và OpenCV:
+
+
+\begin{lstlisting}
+1 . # import the necessary packages
+2 . import imutils
+3 . def pyramid(image, scale=1.5, minSize=(30, 30)):
+4 .     # yield the original image
+5 .     yield image
+6 .      # keep looping over the pyramid
+7 .      while True:
+8 .         # compute the new dimensions of the image and resize it
+9 .         w = int(image.shape[1] / scale)
+10.		    image = imutils.resize(image, width=w)
+11.		    # if the resized image does not meet the supplied minimum
+12.		    # size, then stop constructing the pyramid
+13.		    if image.shape[0] < minSize[1] or image.shape[1] < minSize[0]:
+14.			    break
+15.		    # yield the next image in the pyramid
+16.		    yield image
+\end{lstlisting}
+
+Chúng ta bắt đầu bằng việc import gói \verb|imutils|, chứa các hàm hỗ trợ cho việc xử lý ảnh một cách thuận tiện, bao gồm một số chức năng như thay đổi kích thước (resizing), quay (rotating), xoay ảnh (translating),... Gói này có thể dễ dàng cài đặt thông qua pip:
+
+
+\begin{lstlisting}
+1 . $ pip install imutils
+
+\end{lstlisting}
+
+Sau đó, chúng ta khai báo hàm \verb|pyramid| ở dòng thứ 3. Hàm này được truyền vào 2 tham số. Đầu tiên là \verb|scale|, cho biết bức ảnh sẽ được làm nhỏ đi bao nhiêu lần ở mỗi tầng. Một \verb|scale| nhỏ hơn sẽ cho ra nhiều tầng hơn trong kim tự tháp và ngược lại với một \verb|scale| lớn hơn.
+
+Tham số thứ hai được truyền vào là \verb|minSize| chỉ ra chiều dài và rộng nhỏ nhất cần đạt được (chính là kích thước của ảnh nằm trên đỉnh kim tự tháp). Khi kích thước bức ảnh nhỏ hơn \verb|minSize|, chúng ta sẽ dừng việc tạo ra kim tự tháp ảnh.
+
+Dòng 5 trả về bức ảnh kích thước gốc (nằm ở đáy kim tự tháp). Sau đó, chúng ta bắt đầu vòng lặp để tạo ra kim tự tháp tại dòng 7.
+
+Dòng 9, 10 thực hiện việc tính toán kích thước của ảnh ở tầng kế tiếp và giữ nguyên tỉ lệ chiều dài/chiều rộng bức ảnh. Quá trình này được kiểm soát bởi tham số \verb|scale|.
+
+Tại dòng 13, 14, chúng ta đưa ra điều kiện dừng của hàm, đảm bảo rằng bức ảnh đạt yêu cầu của \verb|minSize|, trong trường hợp không đạt được, thuật toán sẽ kết thúc thông qua việc dừng vòng lặp.
+
+Cuối cùng, trả về bức ảnh đã được thay đổi kích thước ở dòng 16.
+
+Tuy nhiên, có thể thấy trong hàm \verb|pyramid| chúng ta vừa thực hiện, không có bước làm mượt mà (smooth) bức ảnh sau mỗi tầng, cụ thể là đã không sử dụng phương pháp làm mờ \verb|Gaussian|.
+
+Trong đề tài này, nhóm đang hướng đến việc sử dụng đặc trưng \verb|HOG| của ảnh để phân loại các đối tượng, và việc làm mượt mà bức ảnh có thể gây ảnh hưởng đến chất lượng bộ phân loại sử dụng đặc trưng này. \cite{smooth}
+
+Chúng ta tạo một file đơn giản để hiện thực hàm \verb|pyramid|:
+
+\begin{lstlisting}
+1 . from helpers import pyramid
+2 . import argparse
+3 . import time
+4 . import cv2
+5 .
+6 . # construct the argument parser and parse the arguments
+7 . ap = argparse.ArgumentParser()
+8 . ap.add_argument("-i", "--image", required=True, help="Path to the image")
+9 . ap.add_argument("-s", "--scale", type=float, default=1.5, help="scale factor size")
+10. args = vars(ap.parse_args())
+11.
+12. # load the image and define the window width and height
+13. image = cv2.imread(args["image"])
+14.
+15. for (i, resized) in enumerate(pyramid(image, scale=args["scale"])):
+16.    # show the resized image
+17.    cv2.imshow("Layer {}".format(i + 1), resized)
+18.    cv2.waitKey(0)
+
+\end{lstlisting}
+
+Phía trên là một file đơn giản để hiên thực hàm \verb|pyramid| thông qua việc đọc vào một bức hình đơn giản. Để chạy file này, chúng ta cần cung cấp bức ảnh và tham số \verb|scale| theo ý muốn:
+
+\begin{lstlisting}
+1 . $ python pyramid.py --image image/meeting.jpg --scale 1.5
+\end{lstlisting}
+
+Kết quả trả về khi chúng ta truyền \verb|scale| với giá trị 1.5:
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.4]{image/pyramid.png}
+                    \caption{Kim tự tháp ảnh với scale = 1.5 cho ra 8 tầng.}
+                    \label{fig:my_label}
+                \end{figure}
+
+Khi lựa chọn tạo ra một kim tự tháp ảnh, sẽ có sự đánh đổi giữa tốc độ (performance) và số lượng tầng được tạo ra trong kim tự tháp. Hệ số \verb|scale| càng nhỏ sẽ tạo ra càng nhiều tầng cần phải xử lý, tuy nhiên cũng sẽ giúp cho các bộ phân loại ảnh có cơ hội lớn hơn để xác định vị trí các đối tượng đang xem xét.
+
+Một hệ số \verb|scale| lớn sẽ cho ra ít tầng hơn và sẽ ảnh hưởng đến kết quả của các bộ phân loại. Tuy nhiên, chúng ta cũng sẽ thực thi trong thời gian ngắn hơn vì có ít tầng hơn cần xử lý.
+\subsubsection{Sliding Window \cite{sliding}}
+
+
+Cửa sổ trượt hay "sliding window" đóng một vai trò không thể thiếu trong việc phân loại đối tượng bởi vì khả năng chỉ rõ vị trí của đối tượng trong một bức ảnh.
+
+Kết hợp một cửa sổ trượt và một kim tự tháp ảnh vừa đề cập ở trên sẽ giúp chúng ta phát hiện đối tượng trong ảnh với nhiều "scale" và vị trí khác nhau.
+
+Vậy chính xác thì "cửa sổ trượt" là gì? Theo định nghĩa của thị giác máy tính, một cửa sổ trượt là một khu vực hình chữ nhật với chiều dài và chiều rộng cố định. Hình chữ nhật này sẽ "trượt" dọc theo một bức ảnh bất kỳ.
+
+                 \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.4]{image/sliding_window_example.jpg}
+                    \caption{Ví dụ về một cửa sổ trượt, nó sẽ "trượt" theo tấm ảnh từ trái sang phải, từ trên xuống dưới.}
+                    \label{fig:my_label}
+                \end{figure}
+
+Tại mỗi vị trí của cửa sổ, chúng ta xác định khu vực tương ứng trên ảnh và áp dụng một bộ phân loại ảnh để xác định xem tại vị trí này có xuất hiện đối tượng mà chúng ta quan tâm hay không, cụ thể ở đây là con người.
+
+Việc kết hợp với kim tự tháp ảnh để tạo ra một bộ phân loại ảnh hoạt động tốt trên nhiều "scale" và vị trí khác nhau. Kỹ thuật này đóng một vai trò rất quan trọng trong việc nhận diện đối tượng và phân loại hình ảnh.
+
+Ta tiếp tục xem xét tạo ra một cửa sổ trượt với Python và OpenCV:
+\begin{lstlisting}
+1 . # import the necessary packages
+2 . import imutils
+3 . def sliding_window(image, stepSize, windowSize):
+4 .	# slide a window across the image
+5 .	for y in range(0, image.shape[0], stepSize):
+6 .		for x in range(0, image.shape[1], stepSize):
+7 .			# yield the current window
+8 .			yield (x, y, image[y:y + windowSize[1], x:x + windowSize[0]])
+\end{lstlisting}
+
+Hàm \verb|sliding_window| nhận vào 3 tham số. Đầu tiên là \verb|image|- bức ảnh mà chúng ta sẽ duyệt qua.
+
+Tiếp theo là \verb|stepSize|, chỉ định rằng trong mỗi lần di chuyển, cửa sổ sẽ dịch đi bao nhiêu pixel (theo cả hai chiều $x$ và $y$). Thông thường, chúng ta sẽ không muốn phải trượt qua toàn bộ các pixel của bức ảnh (với \verb|stepSize| = 1) bởi điều này sẽ dẫn đến việc phải tính toán rất nhiều nên chúng ta muốn tích hợp thêm một bộ phân loại ảnh đi kèm.
+
+\verb|stepSize| thường sẽ được quyết định khi xem xét độ lớn của tập dữ liệu (dataset). Thực tế, giá trị của \verb|stepSize| thường là 4 hoặc 8 pixel. Cần phải nhớ rằng, giá trị của \verb|stepSize| càng nhỏ, chúng ta càng phải thực hiện nhiều lần "trượt" trên bức ảnh.
+
+Tham số cuối cùng là \verb|windowSize| cho biết kích thước chiều dài và chiều rộng của cửa sổ.
+
+Tại dòng 5-6, tạo ra 2 vòng lặp \verb|for| để lặp theo hai chiều $x$, $y$ của bức ảnh, tăng dần giá trị $x$ và $y$ theo \verb|stepSize|
+
+Dòng 8 trả về một \verb|tuple| chứa giá trị $x$, $y$ tương ứng và cửa sổ tại điểm đang xét.
+
+Chúng ta tạo một file đơn giản để hiện thực hàm \verb|sliding_window|:
+
+\begin{lstlisting}
+1 .from helpers import pyramid
+2 .from helpers import sliding_window
+3 .import argparse
+4 .import time
+5 .import cv2
+6 .
+7 . # construct the argument parser and parse the arguments
+8 . ap = argparse.ArgumentParser()
+9 . ap.add_argument("-i", "--image", required=True, help="Path to the image")
+10. args = vars(ap.parse_args())
+11.
+12. # load the image and define the window width and height
+13. image = cv2.imread(args["image"])
+14. (winW, winH) = (128, 128)
+15.
+16. # loop over the image pyramid
+17. for resized_image in pyramid(image, scale=1.5):
+18.     # loop over the sliding window for each layer of the pyramid
+19.     for (x, y, window) in sliding_window(resized_image, stepSize=32, windowSize=(winW, winH)):
+20.         # if the window does not meet our desired window size, ignore it
+21.         if window.shape[0] != winH or window.shape[1] != winW:
+22.             continue
+23.
+24.        # THIS IS WHERE YOU WOULD PROCESS YOUR WINDOW, SUCH AS APPLYING A
+25.        # MACHINE LEARNING CLASSIFIER TO CLASSIFY THE CONTENTS OF THE
+26.        # WINDOW
+27.
+28.        # Draw the window
+29.        clone = resized_image.copy()
+30.        cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
+31.        cv2.imshow("Window", clone)
+32.        cv2.waitKey(1)
+33.        time.sleep(0.025)
+\end{lstlisting}
+
+Đoạn code trên kết hợp giữa kỹ thuật kim tự tháp ảnh và cửa sổ trượt, nhận đầu vào là một bức ảnh. Để chạy file trên, chúng ta cần cung cấp bức ảnh tùy ý:
+\begin{lstlisting}
+1 .python sliding_window.py --image imageApp/obama.jpg
+
+\end{lstlisting}
+
+Kết quả trả về như sau:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[scale=0.4]{image/sliding.png}
+                    \caption{Một ví dụ về việc áp dụng cửa sổ trượt cho từng tầng của một kim tự tháp ảnh.}
+                    \label{fig:my_label}
+                \end{figure}
+
+Có thể thấy cửa sổ với kích thước cố định sẽ trượt qua các tầng khác nhau của bức ảnh gốc, điều này cho phép tìm kiếm vị trí đối tượng  đầy đủ nhất có thể. Và, tại mỗi vị trí của cửa sổ, chúng ta có thể áp dụng một bộ phân loại đối tượng để kiếm tra nội dung của cửa sổ, chẳng hạn như "tại vị trí này có người hay không?"
+
+Bằng việc kết hợp hai kĩ thuật kim tự tháp ảnh và cửa sổ trượt, chúng ta có thể định vị và phát hiện các vật thể, đối tượng trong các bức ảnh ở các mức và vị trí tùy ý khác nhau. Tuy chỉ là những kỹ thuật đơn giản, tuy nhiên, cả hai đều đóng vai trò rất quan trọng trong  việc phát hiện đối tượng, đặc biệt là trong luận văn của nhóm.
+
+
+
+\subsection{Các nghiên cứu liên quan}
+
+		    \subsubsection{Counting people in the crowd using a generic head detector \cite{Head detector}}
+Phương pháp nhận diện (detection-based) được sử dụng phổ biến trong các lĩnh vực của xử lý ảnh số và thị giác máy tính. Một trong số đó là việc đếm số lượng người thông qua nhận diện các bộ phận trên cơ thể con người. Phương pháp sau đây sẽ dựa trên việc nhận diện vùng đầu của con người, bộ phận dễ quan sát nhất đặc biệt trong các đám đông cũng là ngữ cảnh mà phương pháp này hướng đến\\.
+
+Phương pháp bắt đầu bằng việc xác định “interest points” sử dụng thông tin gradient (gradient information) từ ảnh gray scale để xấp xỉ vị trí vùng đầu của đối tượng. Phương pháp tìm Interest point do nhóm tác giả đề xuất dựa trên việc lượng tử hóa hướng gradient (qantized gradient orientation) điều này làm cho việc tính toán đơn giản và nhanh chóng hơn. Với ảnh $I$ cho trước với vecto gradient theo hướng $x(g_x)$ và $y(g_y)$ được xác định  như sau:
+\begin{equation}
+g_x(i,j) = I(i,j-1) - I(i,j+1)
+g_y(i,j) = I(i-1,j) - I(i+1,j)
+\end{equation}
+trong đó $i,j$ lần lượt là index của ảnh. Khi đó magnitude $(M)$ và hướng (O) được xác định bởi
+\begin{equation}
+M(i,j) = \sqrt{g_x(i,j)^2+g_y(i,j)^2}
+\end{equation}
+\begin{equation}
+O(i,j) = tan^{-1}\frac{g_x(i,j)}{g_y(i,j)}
+\end{equation}
+Từ đó ảnh nhị phân $B$ được xây dựng được dựa trên vecto grandient hướng $O$ như sau
+\begin{equation}
+    B(i,j) = \begin{cases} 1 & \mbox{if }  O(i,j) \in [\pi_l,\pi_u] \\ 0 & otherwise \end{cases}
+\end{equation}
+thông qua ảnh binary $B$ sử dụng connected commponent labeling\cite{Fast connected component labeling} để xác định các vùng khác nhau, ta sẽ thu được interest point chính là trọng tâm của các vùng đó. Bên cạnh đó áp dụng loại bỏ hậu cảnh (background subtraction) giúp thu giảm vùng tìm kiếm của ảnh đồng tăng tốc thời gian xử lý. Một sub-window sẽ được đặt xung quanh các interest point đã tìm được, từ đó dùng phân loại phần được khoanh vùng đó có phải là phần đầu con người hay không. Việc nhận diện phần đầu sẽ được dưa trên bộ phân loại Adaboost kết hợp với bộ phận loại soft cascade để tối ưu hóa thời gian tính toán bằng việc loại bỏ nhanh chóng các mẫu âm. Thuộc tính (features) được sử dụng dựa trên integral channel features \cite{Integral channel features}  \\
+
+Ưu điểm của phương pháp so với bài toán nhóm đang xét là nó thích hợp cho việc áp dụng trên ảnh đơn (single image) hơn là trên video. Nhược điểm là việc cần ảnh có độ phân giải đủ cao để nhận diện chính xác và ngữ cảnh được hướng tới là trong một đám đông. \\
+
+		    \subsubsection{People in seats counting via seat detection for meeting surveillance \cite{Seat Detection}}
+Đếm số lượng chỗ ngồi (seat) là một yêu cầu quan trọng trong việc giám sát các cuộc họp, các cuộc gặp gỡ. Thuật toán seat detection phát huy được độ hiệu quả nhất khi được áp dụng trong các hội trường gặp gỡ lớn, nơi các ghế ngồi được cố định và những người tham gia cùng nhìn về một hướng (thường là về phía người thuyết trình hoặc màn máy chiếu,...). Là một trong những phương pháp kinh điển trong lĩnh vực nhận diện, tuy nhiên, phương pháp gặp nhiều khó khăn khi xử lý nhiều góc mặt khác nhau của người trong ảnh, cũng như các vật dụng đi kèm của họ như ba lô, quần áo,... và giống như hầu hết các phương pháp phát hiện (detection) khác, độ nhiễu của môi trường (bóng người, yếu tố ánh sáng,...) cũng cần được xem xét kỹ lưỡng. \\
+    \begin{figure}[!ht]
+        \centering
+        \includegraphics{image/seat2.png}
+        \caption{Trường hợp tối ưu cho giải thuật seat detection \cite{Seat Detection}}
+        \label{fig:my_label}
+    \end{figure}
+
+Để khắc phục, chúng ta chia các bức ảnh thành ba trường hợp. Thứ nhất là các ghế hoàn toàn trống, không có người hoặc vật ngồi hoặc đặt lên ghế. Trường hợp thứ hai thì ngược lại khi các ghế có người ngồi. Ở hai trường hợp trên thì việc đếm số lượng trở nên dễ dàng hơn khi điều kiện dữ liệu đầu vào đạt lý tưởng, khiến cho các giải thuật hoạt động nhanh hơn, tránh được các yếu tố gây nhiễu khác. Trong trường hợp cuối cùng, các ghế không hoàn toàn trống hoặc có người ngồi, mà sẽ bị che khuất bởi người hoặc các vật dụng khác như ba lô, áo khoác,... Việc che khuất ở đây diễn ra khi bức ảnh được chụp khi đang có người ngồi xuống, đứng lên, hoặc ba lô, quần áo đang được đặt xuống hoặc nhấc lên khỏi ghế. Các thao tác này thường diễn ra nhanh, và nếu camera không đủ tốt để lấy rõ nét các hành động này thì bức ảnh sẽ bị mờ, kém chất lượng đi. Việc giảm bớt các yếu tố gây nhiễu, tăng sự chính xác của bức ảnh do đó cần được quan tâm và xử lý trước khi trở thành dữ liệu đầu vào cho các giải thuật đếm số lượng.
+
+		        \begin{figure}[H]
+		            \centering
+		            \includegraphics{image/seat.png}
+		            \caption{Các trường hợp khác nhau của một bức ảnh \cite{Seat Detection}}
+		            \label{fig:my_label}
+		        \end{figure}
+
+Do có nhiều trường hợp cần cân nhắc để xử lý, do đó giải thuật seat detection được chia ra nhiều bước nhằm phân loại và tối ưu hóa dữ liệu đầu vào. Giải thuật hoạt động theo bốn bước chính, bao gồm tiền xử lý, phân loại ghế trống, phân loại ghế bị che khuất và cuối cùng là chỉnh sửa độ nhiễu của các phần tử ngoại biên các frame.
+
+
+		        \begin{figure}[H]
+		            \centering
+		            \includegraphics[scale=0.8]{image/seat1.png}
+		            \caption{Mô hình hệ thống đếm số lượng người dựa trên ghế ngồi \cite{Seat Detection}}
+		            \label{fig:my_label}
+		        \end{figure}
+
+Như đã được đề cập từ trước, phương pháp chỉ xem xét các bức ảnh trong một hội trường lớn, khi các ghế ngồi được cố định, cùng nhìn về một hướng. Khi bắt đầu thực hiện tiền xử lý, chúng ta xem như trạng thái của các ghế là độc lập lẫn nhau, do đó có thể chia nhỏ bức ảnh thành các frame có kích thước cố định, mỗi frame chứa một ghế khác nhau. Điều này mang lại sự thuận tiện khi vừa đơn giản hoá một bức ảnh thành các frame ảnh đơn giản hơn, vừa phân chia được rõ ràng các ghế với nhau, tránh được độ nhiễu (noise) giữa chúng. Từ tập dữ liệu đơn giản này, chúng ta có thể tiếp tục thực hiện việc nhận biết các ghế có người hay không trong những bước phân loại tiếp theo. \\ \\
+
+\indent Sau khi thu được tập dữ liệu trên, chúng ta sử dụng \textbf{phân loại thô} (coarse classification) để tìm các ghế trống. Bài toán phân loại thô có thể được giải quyết bằng phương pháp SVM, mục đích của chúng ta là tạo ra một “hyperplane" để phân loại các ghế trống và ghế không trống với tỉ lệ chính xác cao nhất. \\ \\
+\indent Với việc đã nhận diện được các ghế trống, một \textbf{phân loại tốt} (fine classification) được sử dụng để phân loại các ghế còn lại, bao gồm ghế có người ngồi và ghế bị che khuất. Ý tưởng chính của phân loại này đến từ việc ghế bị che khuất hoặc có người ngồi có sự khác nhau về mức độ và vị trí che khuất. Trong khi sự che khuất không hoàn toàn thường nằm ở phần rìa của các frame, khi có người đang muốn đứng lên, ngồi xuống hoặc các vật dụng được đặt hay nâng lên, thì với một ghế có người ngồi sẽ có sự che khuất ở toàn bộ khu vực ghế. Phương pháp SVM tuyến tính cũng được áp dụng để phân loại cho trường hợp này nhằm phân loại hai trường hợp trên. \\ \\
+\indent Sau khi đã trải qua hai công đoạn phân loại, tất cả các frame ảnh đều đã được dán “nhãn" mang trạng thái của chúng (trống, có người ngồi hoặc bị che khuất). Tuy nhiên, các “nhãn" này có thể không chính xác do các yếu tố khách quan. Chẳng hạn như trong lúc camera chụp lại ảnh, có một người đi ngang qua một ghế trống, hoặc ai có ai đó đặt tay “lấn" sang các ghế trống khác quá nhiều,... Những hành động này có thể dẫn đến các sai lệch khi phân loại, do đó cần có bước cuối cùng trong bài toán seat detection, chính là chỉnh sửa lại các sai lệch ngoại biên. Chúng ta có thể sử dụng một thuật toán chỉnh sửa liên quan đến thời gian. Giả sử như trong một thời gian ngắn (100 giây chẳng hạn), trạng thái của một ghế đổi không quá hai lần và trong một khoảng thời gian dài hơn (5 phút), mọi người thay đổi tư thế của mình (nhằm hạn chế việc có người “lấn” sang các ghế trống). Tiến trình chỉnh sửa được thực hiện như sau, chúng ta sử dụng các bộ lọc ảnh để làm “mượt" kết quả mỗi 100 giây, sau đó, một ghế được xem là trống nếu nó không có sự che khuất (gây ra bởi chuyển động của những người ngồi kế) nào trong vòng 5 phút. \\ \\
+
+Có thể thấy ưu điểm rõ rệt nhất của phương pháp trên là việc đếm số người rất chính xác thông qua việc phân loại ghế ngồi. Nhờ vào việc thu hẹp ngữ cảnh của bài toán thông qua việc cố định vị trí, hướng của các ghế, tính chất các hàng ghế của hội trường cao thấp khác nhau dẫn đến việc các ghế không che khuất lẫn nhau, ngoài ra chỉ với một camera cũng có thể bao quát được toàn bộ không gian bức ảnh mà vẫn giữ được sự rõ ràng của bố cục; từ các bức ảnh chụp được có thể thu được các tập dữ liệu hết sức chi tiết, rõ ràng, giúp các công đoạn tiếp theo trong phương pháp được thực hiện dễ dàng hơn. Phương pháp do đó được sử dụng dễ dàng trong các buổi họp báo, lễ ra mắt hay thậm chí các sân vận động, nơi mà việc thống kê số lượng người tham gia rất hữu ích, cung cấp được nhiều thông tin đến với các nhà quản lý, các nhà báo, người làm truyền thông,... \\ \\
+Tuy nhiên, dễ dàng nhận thấy phương pháp cần được áp dụng trong những môi trường cố định, được đề cập ở trên. Trong nhiều trường hợp khó có thể được áp dụng do bố cục bức ảnh không đồng nhất. Các camera cần phải có các góc chụp cao, chính diện, ngoài ra cũng cần đủ tốt để ghi lại được các bức hình đủ độ bao quát, tuy nhiên cũng phải đủ độ chi tiết để tránh các yếu tố nhiễu, lệch sáng,...
+
+
+
+
+
+		\subsubsection{People counting on color, size, and motion detection \cite{Base global feature}}
+		Hiện nay, các bài toán liên quan đến đếm số lượng người có thể được chia thành hai loại chính là pedestrian detection và dựa trên global features. Phương pháp được trình bày ở đây sẽ dựa trên bối cảnh của việc giám sát sinh viên tại phòng học của các trường đại học. Phương pháp đếm được chọn dựa trên các đặc trưng về màu sắc, kích cỡ và chuyển động từ đó có thể đưa ra classroom occupancy rate (tạm dịch “tỷ lệ lấp đầy của phòng học”). Lý do đầu tiên là vì mật độ người trong lớp học dày đặc dẫn đến các chi tiết không thật sự chắc chắn. Kế tiếp, mỗi người có thể có những vị trí khác nhau với những kích cỡ khác nhau do hiệu ứng góc nhìn của máy ảnh. Cuối cùng là việc nhận diện sai do các vật thể tĩnh nằm xen kẽ giữa con người như túi xách, các vật dụng …\\
+
+Phương pháp bắt đầu với việc loại bỏ các yếu tố gây nhiễu như ánh sáng, cửa sổ. Sau đó ảnh được chuyển đổi sang dạng nhị phân sẽ hoạt động dựa trên vùng đầu với màu sắc của tóc vì màu sắc của tóc là phần dễ quan sát nhất trên vùng đầu sau khi loại bỏ nhiễu. Tiếp theo sẽ dùng một hàm (fitting function) tính toán diện tích thích hợp cho phần đầu tại mỗi vị trí trong ảnh. Điều này được thực hiện bởi vì diện tích phần đầu của mỗi người sẽ khác nhau ở các vị trí khác nhau do ảnh hưởng của góc đặt camera. Từ đó xóa đi các vùng liên kết quá lớn hoặc quá nhỏ gây cản trở trong việc nhận dạng dựa trên fitting function, từ đó sẽ tính toán được số lượng người. Nhưng nếu chỉ dùng ảnh để nhận dạng thì trong một số trường hợp sẽ dẫn đến kết quả sai do các vật thể tĩnh xuất hiện trong ảnh. Dựa trên điều đó cần thực hiện việc nhận diện chuyển động (motion detection) để loại bỏ các vật thể tĩnh.\\
+
+\begin{figure}[!htb]
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/original.png}
+     \caption{Ảnh gốc ban đầu \cite{Base global feature}}\label{Fig:class1}
+   \end{minipage}\hfill
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/rinterference-emove.png}
+     \caption{Ảnh sau khi loại bỏ các yếu tố gây nhiễu \cite{Base global feature}}\label{Fig:class2}
+   \end{minipage}
+\end{figure}
+
+Đối với bài toán chúng ta đang xét thì đây là một phương pháp có ngữ cảnh khá gần là lớp học. Nhưng việc nhận diện chuyển động có thể là một cản trở đối với bài toán hiện tại đang xét
+\begin{figure}[!htb]
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/hair-binary.png}
+     \caption{Ảnh nhị phân dựa trên màu sắc tóc \cite{Base global feature}}\label{Fig:hair1}
+   \end{minipage}\hfill
+   \begin{minipage}{0.5\textwidth}
+     \centering
+     \includegraphics[width=.75\linewidth]{image/hair-result.png}
+     \caption{Kết quả nhận dạng \cite{Base global feature}}\label{Fig:hair2}
+   \end{minipage}
+\end{figure}
+        \subsubsection{Head-shoulder Detection Using Joint HOG features for People Counting \cite{Head-shoulder}}
+        Đối với bài toán đếm số người trong bức ảnh, các kỹ thuật đã có trước đây thường dựa trên việc nhận diện toàn bộ thân hình của đối tượng, và theo dõi chuyển động của đối tượng đó. Những kỹ thuật này có nhược điểm là không đạt được hiệu quả cao nếu đối tượng bị che khuất, hoặc hình ảnh được chụp từ camera không đủ bao quát, trong không gian hẹp. Hệ thống nhận diện sử dụng phần đầu và vai (head-shoulder) sau đây giải quyết được những nhược điểm đã đề cập. \\
+        \begin{figure}[!ht]
+            \centering
+            \includegraphics[scale = 1]{image/head-shoulder-flow.PNG}
+            \caption{Flow chart của toàn bộ hệ thống \cite{Head-shoulder}}
+            \label{fig:head_shoulder}
+        \end{figure}
+        Hệ thống nhận diện đề xuất được dựa trên mô hình thống kê, một hệ thống nhận diện dựa trên mô hình thống kế thường bao gồm các bước xử lí chính được mô tả trong Hình1: phân tích thuộc tính và phân tách thuộc tính, quét và đánh giá dữ liệu vào, và hậu xử lí kết quả. \\
+
+Với hệ thống chúng ta đang đề cập đến, ở bước đầu tiên, chúng ta sử dụng thuộc tính Joint HOG. Joint HOG là một thuộc tính mở rộng, được tạo nên bằng cách kết hợp 2 thuộc tính HOG của 2 pixel block trong hình ảnh.\\
+
+Ở bước thứ hai, chúng ta sử dụng bộ phân loại đầu-và-vai (head-shoulder) trên dữ liệu vào, bộ phân loại này được huấn luyện bằng một giải thuật kết hợp SVM và AdaBoost. Thuật toán Adaboost xây dựng nên một bộ strong classifier bằng cách kết hợp nhiều weak classifier, ở đây bộ phân loại SVM được sử dụng như một weak classifier. Dữ liệu pixel đầu vào được chuyển hoá về dạng tập của các HOG feature.\\
+
+ Công thức cho bộ phân loại một mẫu đầu vào $(x_i,y_i)$, với $x$ là mẫu input, $y$ là label tương ứng với mẫu đó
+ \begin{equation}
+     f(x) = sgn\{\sum_{i=1}^{k}\alpha^{*}_iy^{*}_i(x^{*}_i \cdot {x}) + b^{*}\}
+ \end{equation}
+
+Trong đó $a^{*}_i$ là trọng số ứng với support vertor $x_i$
+Giải thuật được khởi tạo bằng việc đặt trọng số 1 cho toàn bộ mẫu input, và đặt điều kiện dùng, sử dụng max False Positive hoặc max False Alarm
+
+Ở mỗi bước lặp, giải thuật lựa chọn ngẫu nhiên 100 features, sau đó huấn luyện một bộ phân loại SVM cho từng feature. SVM với tỉ lệ lỗi thấp nhất sẽ được thêm vào strong classifier với trọng số alpha, được tính theo công thức:
+\begin{equation}
+    \alpha_t = \frac{1}{2}ln(\frac{1-\varepsilon_j}{\varepsilon_j})
+\end{equation}
+
+với $\varepsilon$ là mức độ lỗi.
+
+Tiếp theo, trọng số của mỗi input sẽ được cập nhật theo xu hướng tăng trọng số cho những input bị phân loại sai, giảm trọng số những input được phân loại đúng. Sau khi đã cập nhật trọng số của input, giải thuật sẽ tiến hành phân loại lại bộ input, nếu đã đạt điều kiện dừng thì việc xây dựng bộ phân loại coi như hoàn thành, nếu không thì tiếp tục quay lại bước lặp để thêm SVM vào strong feature.
+Các bước xây dựng của thuật toán Adaboost được minh hoạ như hình \ref{fig:Cascade AdaBoost}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{image/AdBoosttraining.png}
+    \caption{Flow chart của Cascade AdaBoost training \cite{Head-shoulder}}
+    \label{fig:Cascade AdaBoost}
+\end{figure}
+Cuối cùng, bước hậu xử lí bao gồm các thao tác như đánh dấu đối tượng, kết hợp các frames…, bước này thường được tuỳ biến theo nhu cầu sử dụng của người dùng.\\
+Ưu điểm của giải thuật: Đạt được tỉ lệ chính xác cao mà không cần hình ảnh của toàn bộ đối tượng.\\
+Nhược điểm: Hình ảnh phải có được phần Đầu-vai của đối tượng, có thể có trường hợp False Positive nếu gặp vật thể có hình dáng giống phần Đầu-vai của con người.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		\section{Phương pháp đề xuất}
+		\subsection{Yêu cầu bài toán}
+		 Yêu cầu ban đầu của bài toán: Đếm số lượng người trong ảnh cuộc họp. \\
+		 Theo như yêu cầu, từ một bức ảnh cuộc họp, nhóm cần phát hiện được những đối tượng (ở đây là con người) có trong bức ảnh, sau đó đưa ra số lượng đối tượng đã phát hiện được. Để phân biệt với bài toán đều số người trong đám đông thông thường, chúng ta có 2 điểm chính cần lưu ý: đó là bối cảnh cuộc họp, và hình ảnh (tư thế) của người trong cuộc họp. Khi đưa ra phương pháp đề xuất chúng ta phải dựa trên những lưu ý vừa đề cập.
+		\subsection{Phương pháp đề xuất}
+
+		\begin{figure}[H]
+		    \centering
+		    \includegraphics{image/sample.png}
+		    \caption{Vài mẫu trong data set nhóm thu thập được \cite{DataSet}}
+		    \label{fig:my_label}
+		\end{figure}
+Sau khi phân tích dataset hình ảnh của các cuộc họp \cite{DataSet} nhóm có được nhận định chung về bối cảnh của ảnh chụp một cuộc họp:
+    \begin{itemize}
+        \item Đa phần người tham gia đều đang ngồi, và bị che lấp phần thân dưới
+        \item Những người tham gia thường sắp xếp theo một hình eclipse / nửa eclipse, vì vậy sẽ có những nhìn chính diện với camera, nhưng cũng có những người quay lưng lại với camera.
+        \item Khoảng cách giữa mỗi người thường đều nhau, và không có quá nhiều sự che khuất giữa mỗi người
+        \item Hình ảnh đến từ rất nhiều góc độ khác nhau, nhưng hầu hết đều bao quát được toàn bộ những người tham gia cuộc họp trong bức hình.
+    \end{itemize}
+Với những đặc điểm trên, nhóm quyết định lựa chọn giải thuật theo hướng phát hiện Head-shoulder của đối tượng (như ở phần các nghiên cứu liên quan), vì nhận thấy rằng giải thuật này rất phù hợp với đặc thù của dataset:
+    \begin{itemize}
+        \item Giải thuật phát hiện đối tượng dựa trên phần Đầu-vai, nên việc che khuất phần thân dưới sẽ không gây ảnh hưởng
+        \item Giải thuật phát hiện phần Đầu-vai dựa trên hình dáng giống như ký tự “$\Omega$”, nên vẫn có thể phát hiện được đối tượng dù nhìn chính diện hay quay lưng với camera
+        \item Do khoảng cách giữa mỗi người trong cuộc họp thường đều nhau, không có mật độ quá dày đặc, nên phần đầu-vai rất ít khi bị che khuất.
+    \end{itemize}
+ Các bước xử lí của giải thuật:\\
+ Từ hình ảnh đầu vào, tính gradient theo trục x, y của mỗi pixel theo công thức:
+ \begin{equation}
+    g_x(x,y) = L(x+1,y) - L(x-1,y)
+    g_x(x,y) = L(x,y+1) - L(x,y-1)
+ \end{equation}
+
+Sau đó, tính độ lớn, và hướng của vector gradient tại mỗi pixel:
+\begin{equation}
+    g(x,y) = \sqrt{g_x(x,y)^2+g_y(x,y)^2}
+\end{equation}
+\begin{equation}
+    \theta(x,y) = tan^{-1}\frac{g_x(x,y)}{g_y(x,y)}
+\end{equation}
+
+Từ thông tin về vector gradient, xây dựng Histogram of Oriented Gradient cho mỗi cell (4x4 pixels) bằng cách phân bố hướng vector vào 9 bin (0~180 độ, mỗi bin 20 độ). Hình thành các block (2x2 cells), xây dựng HOG feature cho các block này bằng cách kết hợp 4 vector HOG feature của 4 cells nằm trong nó thành 1 vector duy nhất
+Sau khi đã có HOG feature cho mỗi block, chúng ta xây dựng Joint HOG feature theo mẫu $H_{(b_{i},b_{j})} = [H_{b_i}, H_{b_j}]$,  với $b_i$ và $b_j$ là 2 block bất kì trong ảnh, $H_{b_i}$ là HOG feature của block $i$. Lý do chúng ta kết hợp 2 thuộc tính HOG như vậy, là vì hình ảnh phần đầu và vai người có tính đối dứng, dạng vòng cung, giống như kí hiệu “$\Omega$”, nên việc kết hợp HOG feature sẽ giúp tăng hiệu quả của bộ phân loại.\\ \\
+Tiếp theo, chúng ta sử dụng Adaboost và SVM để xây dựng một bộ phân loại (như phần 2.2.4) với đầu vào là những Joint HOG feature đã được tạo ra. Khi đã có được bộ phân loại, chúng ta tiến hành quét các từng cửa sổ trong bức ảnh, kiểm tra bằng bộ phân loại, đánh dấu những đối tượng được phát hiện.\\ \\
+Bước cuối cùng, chúng ta hợp nhất những đánh dấu trùng lặp của cùng một đối tượng, và đưa ra kết quả về số lượng đối tượng phát hiện được.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale = 0.75]{image/Propose_Flowchart.png}
+    \caption{Flow chart của phương pháp đề xuất}
+    \label{fig:my_label}
+\end{figure}
+		\subsection{Phương pháp đánh giá}
+Nhóm thực hiện kiểm tra kết quả thu được từ phương pháp bằng việc đánh giả kết quả nhận diện của mô hình so với mắt thường . Với mỗi mẫu dữ liệu để test nhóm sẽ tiến hành ghi nhận kết quả bằng mắt thường từ đó so sánh với kết quả đếm của phương pháp để đánh giá tỉ lệ nhận dạng sai đối tượng.
+\newpage
+\section{Kết quả dự kiến đạt được}
+		\subsection{Kết quả dự kiến đạt được}
+
+    \begin{figure}[!ht]
+        \centering
+        \includegraphics{image/result.png}
+        \caption{Kết quả dự kiến của hệ thống \cite{Head-shoulder}}
+        \label{fig:my_label}
+    \end{figure}
+   Hệ thống có thể nhận diện được toàn bộ những người nhìn rõ phần đầu-vai. Đối với đối tượng là những người có vị trí nằm ngang camera trong ảnh thì sẽ nhận diện được phần lớn đối tượng với tỉ lệ trên 70\% vì với những đối tượng này phần ngực và lưng nhô ra khá tương tự với phần đầu-vai
+\newpage
+		\subsection{Kế hoạch thực hiện luận văn}
+		\begin{itemize}
+		    \item Tuần 1-2: Gán nhãn cho phần Đầu-vai của hình ảnh trong dataset (positive samples)
+		    \item Tuần 3: Gán nhãn ngẫu nhiên cho những phần không phải đầu-vai trong dataset (negative samples)
+		    \item Tuần 4-5: Trích xuất Joint HOG feature từ dữ liệu đã gán nhãn
+		    \item Tuần 6-7-8: Hiện thực training Head-shoulder classifier sử dụng Adaboost
+		    \item Tuần 9-10: Hiện thực quy trình đọc hình ảnh đầu vào, tạo các cửa sổ để đưa vào bộ classifier.
+		    \item Tuần 11-12: Hiện thực việc hợp nhất các cửa sổ trùng lặp trên cùng 1 đối tượng, đưa ra kết quả về số lượng đối tượng trong hình.
+		    \item  Tuần 13-14: Đánh giá kết quả đạt được, thực hiện điều chỉnh, tối ưu nếu cần thiết.
+		    \item Tuần 15: Hoàn thiện và nộp báo cáo Luận văn Tốt Nghiệp
+
+		\end{itemize}
+        \newpage
+		\begin{thebibliography}{9}
+		    \bibitem{DataSet}
+		    \href{http://mmlab.ie.cuhk.edu.hk/projects/WIDERAttribute.html}{Yining Li, Chen Huang, Chen Change Loy, and Xiaoou Tang, Department of Informaiton Engineering, The Chinese University of Hong Kong, "Human Attribute Recognition by Deep Hierarchical Contexts", Meeting scene, 2016}
+		    \bibitem{HistPicture}
+		    LE Thanh Sach, Faculty of Computer Science and Engineering, Ho Chi Minh University of Technology, VNU-HCM, Chapter 2: Point Processing and Histogram, Image Processing and Computer Vision
+            Truy cập lần cuối: 25/12/2019
+            \bibitem{AdaBoost}
+            \url{https://towardsdatascience.com/boosting-algorithm-adaboost-b6737a9ee60c}
+            Truy cập lần cuối: 25/12/2019
+            \bibitem{SVM}
+            \url{https://machinelearningcoban.com/2017/04/09/smv/}
+            Truy cập lần cuối: 25/12/2019
+			\bibitem{Head detector}
+		    Venkatesh Bala Subburaman, Adrien Descamps and Cyril Carincotte, "Counting people in the crowd using a generic head detector" Image Department,2012 IEEE Ninth International Conference on Advanced Video and Signal-Based Surveillance
+
+			\bibitem{Seat Detection}
+			Hongyu Liang, Jinchen Wu, and Kaiqi Huang, National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Science, "People in seats counting via seat detection for meeting surveilliance", 2014
+
+			\bibitem{Fast connected component labeling}
+			L. He, Y. Chao, K. Suzuki, and K. Wu, "Fast connected component labeling", Pattern Recognition, vol. 42, no. 9, pp. 1977–1987, 2009.
+			\bibitem{Base global feature}
+			Yang Liu and Huayu Wu,"A People Counting Method Based on Universities’
+Surveillance Videos and Its Application
+on Classroom Query", School of Information Science and Engineering,
+Shenyang University of Technology, Shenyang, China, CCBR 2014, LNCS 8833 , pp. 481–488, 2014
+            \bibitem{Integral channel features}
+            P. Dollar, Z. Tu, P. Perona, and S. Belongie, “Integral Channel Features.” BMVC, 2009.
+
+            \bibitem{Head-shoulder}
+            LipingCHEN,Huibin WU, Shuguang ZHAO, Jiong GU,"Head-shoulder Detection Using Joint HOG features for People Counting and Video,2014 IEEE Workshop on Electronics, Computer and Applications,
+Surveillance in Library",pp.429-432
+            \bibitem{BTT}
+            \href{https://www.facebook.com/BKCSE.Multimedia/}{Ban Truyền Thông khoa Khoa Học và Kỹ Thuật Máy Tính - ĐH Bách Khoa}
+
+            \bibitem{pyramid}
+            \href{https://www.pyimagesearch.com/2015/03/16/image-pyramids-with-python-and-opencv/}{Image Pyramids with Python and OpenCV}
+
+             \bibitem{sliding}
+            \href{https://www.pyimagesearch.com/2015/03/23/sliding-windows-for-object-detection-with-python-and-opencv/}{Sliding Windows for Object Detection with Python and OpenCV}
+
+            \bibitem{smooth}
+            \href{https://lear.inrialpes.fr/people/triggs/pubs/Dalal-cvpr05.pdf}{Navneet Dalal and Bill Triggs INRIA Rhone-Alps, 655 avenue de l’Europe, Montbonnot 38334, France, "Histograms of Oriented Gradients for Human Detection"}
+
+            \bibitem{Robusts Face Detetion}
+            P. Viola and M. J. Jones, Robus real-time face detection, International Journal of Computer Vision, vol. 57, no. 2, pp. 137-154, 2004
+		\end{thebibliography}
+
+\end{document}
