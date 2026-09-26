@@ -9,6 +9,8 @@ def run_weak_classifier(x: np.ndarray, c: svm.SVC) -> int:
 
 
 class Layer:
+
+    
     def __init__(self, threshold=float(), weak_clf_ensemble=None):
         self.threshold = threshold
         self.weak_clf_ensemble = weak_clf_ensemble
